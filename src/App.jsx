@@ -11,6 +11,7 @@ import { Toaster } from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from './components/svgs/common/LoadingSpinner';
 import { Navigate } from 'react-router-dom';
+import { getApiUrl } from './utils/api';
 
 function App() {
 	const { data: authUser, isLoading } = useQuery({
@@ -18,7 +19,9 @@ function App() {
 		queryKey: ["authUser"],
 		queryFn: async () => {
 			try {
-				const res = await fetch("/api/auth/me");
+				const res = await fetch(getApiUrl("/api/auth/me"), {
+					credentials: "include"
+				});
 				const data = await res.json();
 				if (data.error) return null;
 				if (!res.ok) {
