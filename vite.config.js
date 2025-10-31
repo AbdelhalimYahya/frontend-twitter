@@ -11,7 +11,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'backend-twitter-production.up.railway.app',
         changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/api/, ''),
       },
